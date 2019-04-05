@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 
+require('./lib/mongo/connectionDB')
 const cotizacionRouter = require('./routes/api/cotizacion')
 const { config } = require('./config/index')
 
