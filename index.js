@@ -2,7 +2,9 @@
 const express = require('express')
 const app = express()
 
-const port = process.env.PORT || 3000
+const { config } = require('./config/index')
+
+const port = config.port
 
 const server = app.listen(port, () => {
   console.log(`Server listening on port ${server.address().port}`)

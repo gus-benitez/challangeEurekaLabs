@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/gus-benitez/challangeEurekaLabs#readme",
   "dependencies": {
+    "dotenv": "^7.0.0",
     "express": "^4.16.4"
   },
   "devDependencies": {
