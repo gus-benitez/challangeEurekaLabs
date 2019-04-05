@@ -1,0 +1,28 @@
+{
+  "name": "challangeeurekalabs",
+  "version": "1.0.0",
+  "description": "REST API capaz de entregar información precisa sobre valores de acciones para ciertas empresas en la bolsa de valores de Estados Unidos.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gus-benitez/challangeEurekaLabs.git"
+  },
+  "author": "Gustavo Eduardo Benitez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gus-benitez/challangeEurekaLabs/issues"
+  },
+  "homepage": "https://github.com/gus-benitez/challangeEurekaLabs#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10",
+    "standard": "^12.0.1"
+  }
+}
