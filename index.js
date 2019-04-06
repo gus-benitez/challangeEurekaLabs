@@ -23,7 +23,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(passport.initialize())
 // timestamp | host | url | action | data
-app.use(morgan(`${+new Date()} | :remote-addr | :url | :method | :date[iso]`, { stream: accessLogStream }))
+morgan.token('body', function getId (req) {
+  return JSON.stringify(req.body)
+})
+app.use(morgan(`:date[iso] | :remote-addr | :url | :method | :body`, { stream: accessLogStream }))
 
 // routes
 app.use('/api/cotizacion', cotizacionRouter)
@@ -39,5 +42,5 @@ process.on('unhandledRejection', handleFatalError)
 
 function handleFatalError (err) {
   console.error(err.stack)
-  process.exit(1)
+  // Aqui deberia agregarse algun servicio de tracking de errores como Rollbar
 }
