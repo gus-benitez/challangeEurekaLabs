@@ -3,6 +3,9 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const passport = require('passport')
+var fs = require('fs')
+var path = require('path')
+const morgan = require('morgan')
 
 require('./lib/mongo/connectionDB')
 require('./utils/user/strategies/local-auth')
@@ -11,12 +14,16 @@ const userRouter = require('./routes/api/user')
 const { config } = require('./config/index')
 
 const port = config.port
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'invest-api.log'), { flags: 'a' })
 
 // middlewares
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(passport.initialize())
+// timestamp | host | url | action | data
+app.use(morgan(`${+new Date()} | :remote-addr | :url | :method | :date[iso]`, { stream: accessLogStream }))
 
 // routes
 app.use('/api/cotizacion', cotizacionRouter)
