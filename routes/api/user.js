@@ -6,18 +6,22 @@ const jwt = require('jsonwebtoken')
 const { config } = require('../../config/index')
 // JWT strategy
 require('../../utils/user/strategies/jwt')
+const validation = require('../../utils/middlewares/validationHandler')
+const { createUserSchema } = require('../../utils/schemas/user')
 
-router.post('/signup', function (req, res, next) {
-  passport.authenticate('local-signup', async function (err, user, info) {
-    if (err) { return next(err) }
-    if (!user) { return res.json(info) }
+router.post('/signup',
+  validation(createUserSchema),
+  function (req, res, next) {
+    passport.authenticate('local-signup', async function (err, user, info) {
+      if (err) { return next(err) }
+      if (!user) { return res.json(info) }
 
-    res.status(200).json({
-      data: { id: user._id },
-      message: 'Usuario Creado'
-    })
-  })(req, res, next)
-})
+      res.status(200).json({
+        data: { id: user._id },
+        message: 'Usuario Creado'
+      })
+    })(req, res, next)
+  })
 
 router.post('/login', function (req, res, next) {
   passport.authenticate('local-login', function (err, user, info) {

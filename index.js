@@ -25,3 +25,12 @@ app.use('/api/user', userRouter)
 const server = app.listen(port, () => {
   console.log(`Server listening on port ${server.address().port}`)
 })
+
+// Manejo de errores global de la la aplicación
+process.on('uncaughtException', handleFatalError)
+process.on('unhandledRejection', handleFatalError)
+
+function handleFatalError (err) {
+  console.error(err.stack)
+  process.exit(1)
+}
