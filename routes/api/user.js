@@ -4,6 +4,8 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
 const { config } = require('../../config/index')
+// JWT strategy
+require('../../utils/user/strategies/jwt')
 
 router.post('/signup', function (req, res, next) {
   passport.authenticate('local-signup', async function (err, user, info) {
@@ -34,6 +36,13 @@ router.post('/login', function (req, res, next) {
       return res.status(200).json({ access_token: token })
     })
   })(req, res, next)
+})
+
+router.get('/logout',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+  req.logout()
+  return res.status(200).json({ access_token: "no token provided" })
 })
 
 module.exports = router
