@@ -31,13 +31,13 @@ passport.use('local-signup', new LocalStrategy({
     done(null, newUser)
   }
 }))
-/*
+
 passport.use('local-login', new LocalStrategy({
-  usernameField: 'username',
+  usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true
-}, async (req, username, password, done) => {
-  const user = await User.findOne({ username: username })
+}, async (req, email, password, done) => {
+  const user = await User.findOne({ email: email })
   if (!user) {
     return done(null, false, { user: false, message: 'Usuario no encontrado.' })
   }
@@ -46,4 +46,3 @@ passport.use('local-login', new LocalStrategy({
   }
   return done(null, user)
 }))
-*/
