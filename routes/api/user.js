@@ -23,7 +23,7 @@ router.post('/login', function (req, res, next) {
   passport.authenticate('local-login', function (err, user, info) {
     if (err) { return next(err) }
     if (!user) { return res.json(info) }
-    
+
     req.login(user, { session: false }, async function (error) {
       if (error) {
         next(error)
@@ -41,8 +41,8 @@ router.post('/login', function (req, res, next) {
 router.get('/logout',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-  req.logout()
-  return res.status(200).json({ access_token: "no token provided" })
-})
+    req.logout()
+    return res.status(200).json({ access_token: 'no token provided' })
+  })
 
 module.exports = router
