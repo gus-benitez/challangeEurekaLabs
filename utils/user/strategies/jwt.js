@@ -3,7 +3,6 @@ const passport = require('passport')
 const { Strategy, ExtractJwt } = require('passport-jwt')
 
 const { config } = require('../../../config')
-require('../../../lib/mongo/connectionDB')
 const User = require('../../../lib/mongo/models/user')
 
 passport.use(
